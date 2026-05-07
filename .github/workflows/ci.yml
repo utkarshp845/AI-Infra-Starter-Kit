@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install demo-service dependencies
+        working-directory: apps/demo-service
+        run: pip install -r requirements.txt
+
+      - name: Lint demo-service
+        working-directory: apps/demo-service
+        run: ruff check app tests
+
+      - name: Test demo-service
+        working-directory: apps/demo-service
+        run: pytest -q
+
+      - name: Install ai-sre-assistant dependencies
+        working-directory: apps/ai-sre-assistant
+        run: pip install -r requirements.txt
+
+      - name: Lint ai-sre-assistant
+        working-directory: apps/ai-sre-assistant
+        run: ruff check app cli tests
+
+      - name: Test ai-sre-assistant
+        working-directory: apps/ai-sre-assistant
+        run: pytest -q

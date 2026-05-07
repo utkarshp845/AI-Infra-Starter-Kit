@@ -1,0 +1,4 @@
+{"timestamp":"2026-05-07T14:12:10.100000+00:00","level":"WARNING","service":"demo-service","logger":"demo-service","message":"simulated_latency","event":"simulated_latency","endpoint":"/simulate/latency","latency_ms":1432}
+{"timestamp":"2026-05-07T14:12:11.535000+00:00","level":"INFO","service":"demo-service","logger":"demo-service","message":"request_completed","event":"request_completed","method":"GET","path":"/simulate/latency","status_code":200,"duration_ms":1435.4,"request_id":"sample-latency-1"}
+{"timestamp":"2026-05-07T14:12:12.020000+00:00","level":"INFO","service":"demo-service","logger":"demo-service","message":"request_completed","event":"request_completed","method":"GET","path":"/api/orders","status_code":200,"duration_ms":5.1,"request_id":"sample-latency-2"}
+

@@ -1,0 +1,57 @@
+name: ai-infra-starter-kit
+
+services:
+  demo-service:
+    build:
+      context: ./apps/demo-service
+    container_name: ai-infra-demo-service
+    ports:
+      - "8000:8000"
+    environment:
+      DEMO_SERVICE_LOG_PATH: /shared/logs/demo-service.log
+    volumes:
+      - ./logs:/shared/logs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  ai-sre-assistant:
+    build:
+      context: ./apps/ai-sre-assistant
+    container_name: ai-infra-ai-sre-assistant
+    ports:
+      - "8001:8001"
+    environment:
+      DEMO_SERVICE_LOG_PATH: /shared/logs/demo-service.log
+      LLM_PROVIDER: ${LLM_PROVIDER:-none}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      MODEL_NAME: ${MODEL_NAME:-gpt-4o-mini}
+    volumes:
+      - ./logs:/shared/logs
+    depends_on:
+      demo-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Optional local model provider for later experiments.
+  # 1. Uncomment this service.
+  # 2. Set LLM_PROVIDER=ollama and OPENAI_BASE_URL=http://ollama:11434/v1 in .env.
+  # 3. Pull a model with: docker exec -it ai-infra-ollama ollama pull llama3.1
+  #
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ai-infra-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+
+# volumes:
+#   ollama-data:
