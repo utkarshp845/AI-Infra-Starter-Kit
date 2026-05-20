@@ -57,3 +57,41 @@ What comes next:
 - Add incident walkthroughs for error spikes and latency spikes.
 - Teach the AI SRE Assistant to read and summarize metrics.
 - Add an optional Prometheus/Grafana path without making it required for the local quickstart.
+
+## Week 2, Day 2 - Structured Logs And Request Correlation
+
+Today I continued observability week by improving structured logs.
+
+Day 1 focused on metrics: counters, latency buckets, simulation counters, and label cardinality.
+
+Day 2 focused on logs: how to follow one request through multiple events.
+
+What changed:
+
+- Added request-scoped context for `request_id`.
+- Preserved incoming `X-Request-ID` headers when callers provide them.
+- Generated a request ID when callers do not provide one.
+- Returned the request ID in the `x-request-id` response header.
+- Added the same request ID to route-level logs and `request_completed` logs.
+- Added a sample correlated request log.
+- Expanded observability docs with structured log fields and request correlation.
+- Added tests for request ID response headers and correlated route logs.
+
+Why this matters:
+
+Metrics can show that errors increased or latency crossed a threshold. Logs help explain what happened in a specific request.
+
+Without request IDs, logs are just scattered events. With request IDs, a failure becomes a story that can be followed from the route-level error to the final response log.
+
+Lessons learned:
+
+- Request IDs are one of the simplest useful observability patterns.
+- Good logs use stable field names, not just readable messages.
+- Correlation IDs make both human debugging and AI analysis more grounded.
+- Observability starts with signal quality before dashboards or tracing tools.
+
+What comes next:
+
+- Add incident walkthroughs that combine logs and metrics.
+- Teach the AI SRE Assistant to summarize metrics alongside logs.
+- Keep the local workflow simple while gradually introducing production habits.

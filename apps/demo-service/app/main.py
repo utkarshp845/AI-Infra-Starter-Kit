@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request, Response
 
 from app.logging_config import logger
 from app.metrics import METRICS
+from app.request_context import reset_request_id, set_request_id
 from app.routes import router
 
 
@@ -20,6 +21,7 @@ app.include_router(router)
 @app.middleware("http")
 async def record_requests(request: Request, call_next):
     request_id = request.headers.get("x-request-id", str(uuid4()))
+    request_id_token = set_request_id(request_id)
     start = perf_counter()
     status_code = 500
 
@@ -62,6 +64,7 @@ async def record_requests(request: Request, call_next):
                 "request_id": request_id,
             },
         )
+        reset_request_id(request_id_token)
 
 
 @app.get("/metrics")

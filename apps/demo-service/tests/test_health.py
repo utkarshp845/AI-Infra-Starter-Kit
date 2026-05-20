@@ -1,10 +1,22 @@
+import logging
+
 from fastapi.testclient import TestClient
 
+from app.logging_config import logger
 from app.main import app
 from app.metrics import METRICS
 
 
 client = TestClient(app)
+
+
+class CaptureHandler(logging.Handler):
+    def __init__(self) -> None:
+        super().__init__()
+        self.records = []
+
+    def emit(self, record: logging.LogRecord) -> None:
+        self.records.append(record)
 
 
 def setup_function():
@@ -48,3 +60,28 @@ def test_metrics_include_simulation_counters():
     assert 'demo_service_simulated_latency_events_total{endpoint="/simulate/latency"} 1' in response.text
     assert 'demo_service_memory_pressure_events_total{endpoint="/simulate/memory-pressure"} 1' in response.text
     assert 'status_code="500"' in response.text
+
+
+def test_request_id_header_is_returned_and_used_in_route_logs():
+    handler = CaptureHandler()
+    logger.addHandler(handler)
+
+    try:
+        response = client.get("/simulate/error?probability=1.0", headers={"x-request-id": "demo-request-123"})
+    finally:
+        logger.removeHandler(handler)
+
+    assert response.status_code == 500
+    assert response.headers["x-request-id"] == "demo-request-123"
+
+    records_by_event = {record.event: record for record in handler.records if hasattr(record, "event")}
+    assert records_by_event["simulated_error"].request_id == "demo-request-123"
+    assert records_by_event["request_completed"].request_id == "demo-request-123"
+    assert records_by_event["request_completed"].status_code == 500
+
+
+def test_request_id_header_is_generated_when_missing():
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.headers["x-request-id"]

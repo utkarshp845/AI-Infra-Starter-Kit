@@ -64,3 +64,40 @@ path="/api/orders/{order_id}"
 ```
 
 The cleaned-up metrics use FastAPI route templates where possible so dynamic IDs do not explode the number of time series.
+
+## Structured Logs And Request Correlation
+
+Metrics show the shape of a problem. Logs explain the story behind specific events.
+
+For logs to be useful during an incident, related events need a shared field. `demo-service` uses `request_id` for that.
+
+The service now:
+
+- Accepts an incoming `X-Request-ID` header.
+- Generates a request ID when the caller does not provide one.
+- Returns the request ID in the `x-request-id` response header.
+- Adds the same request ID to route-level logs and the final `request_completed` log.
+
+This lets one request become a traceable sequence:
+
+```text
+simulated_error request_id=demo-request-123
+request_completed request_id=demo-request-123 status_code=500
+```
+
+Useful structured log fields:
+
+- `timestamp`: when the event happened.
+- `level`: log severity such as `INFO`, `WARNING`, or `ERROR`.
+- `service`: which service emitted the log.
+- `event`: stable machine-readable event name.
+- `message`: human-readable summary.
+- `method`: HTTP method for request logs.
+- `path`: normalized route path when available.
+- `endpoint`: source endpoint for route-level events.
+- `status_code`: HTTP response status.
+- `duration_ms`: request duration.
+- `request_id`: correlation ID for following one request through logs.
+- `error_type`: stable error category when a failure is known.
+
+The goal is not to log everything. The goal is to log enough consistent evidence that a human or AI assistant can separate facts from guesses.
