@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from app.logging_config import get_log_path, logger
 from app.metrics import METRICS
+from app.request_context import current_request_id
 
 
 router = APIRouter()
@@ -41,7 +42,7 @@ def ready() -> dict:
 def list_orders() -> dict:
     logger.info(
         "orders_listed",
-        extra={"event": "orders_listed", "order_count": len(ORDERS), "endpoint": "/api/orders"},
+        extra=_log_extra(event="orders_listed", order_count=len(ORDERS), endpoint="/api/orders"),
     )
     return {"orders": list(ORDERS.values())}
 
@@ -52,17 +53,17 @@ def get_order(order_id: str) -> dict:
     if not order:
         logger.warning(
             "order_not_found",
-            extra={
-                "event": "order_not_found",
-                "order_id": order_id,
-                "endpoint": "/api/orders/{order_id}",
-            },
+            extra=_log_extra(
+                event="order_not_found",
+                order_id=order_id,
+                endpoint="/api/orders/{order_id}",
+            ),
         )
         raise HTTPException(status_code=404, detail={"message": "order not found", "order_id": order_id})
 
     logger.info(
         "order_fetched",
-        extra={"event": "order_fetched", "order_id": order_id, "endpoint": "/api/orders/{order_id}"},
+        extra=_log_extra(event="order_fetched", order_id=order_id, endpoint="/api/orders/{order_id}"),
     )
     return {"order": order}
 
@@ -79,13 +80,13 @@ def simulate_error(
         )
         logger.error(
             "simulated_checkout_failure",
-            extra={
-                "event": "simulated_error",
-                "error_type": "checkout_dependency_timeout",
-                "endpoint": "/simulate/error",
-                "probability": probability,
-                "roll": round(roll, 4),
-            },
+            extra=_log_extra(
+                event="simulated_error",
+                error_type="checkout_dependency_timeout",
+                endpoint="/simulate/error",
+                probability=probability,
+                roll=round(roll, 4),
+            ),
         )
         raise HTTPException(
             status_code=500,
@@ -97,7 +98,7 @@ def simulate_error(
 
     logger.info(
         "simulated_error_endpoint_recovered",
-        extra={"event": "simulated_error_recovered", "endpoint": "/simulate/error", "roll": round(roll, 4)},
+        extra=_log_extra(event="simulated_error_recovered", endpoint="/simulate/error", roll=round(roll, 4)),
     )
     return {"status": "ok", "message": "the simulated dependency responded this time"}
 
@@ -116,7 +117,7 @@ async def simulate_latency(
     log_method = logger.warning if latency_ms >= 1000 else logger.info
     log_method(
         "simulated_latency",
-        extra={"event": "simulated_latency", "endpoint": "/simulate/latency", "latency_ms": latency_ms},
+        extra=_log_extra(event="simulated_latency", endpoint="/simulate/latency", latency_ms=latency_ms),
     )
     return {"status": "ok", "latency_ms": latency_ms}
 
@@ -129,11 +130,11 @@ def simulate_memory_pressure(size_mb: int = Query(default=12, ge=1, le=64)) -> d
 
     logger.warning(
         "simulated_memory_pressure",
-        extra={
-            "event": "simulated_memory_pressure",
-            "endpoint": "/simulate/memory-pressure",
-            "memory_mb": allocated_mb,
-        },
+        extra=_log_extra(
+            event="simulated_memory_pressure",
+            endpoint="/simulate/memory-pressure",
+            memory_mb=allocated_mb,
+        ),
     )
     return {
         "status": "ok",
@@ -150,6 +151,13 @@ def simulate_log_event(
     log_method = {"info": logger.info, "warning": logger.warning, "error": logger.error}[level]
     log_method(
         event,
-        extra={"event": event, "endpoint": "/simulate/log-event", "operator_generated": True},
+        extra=_log_extra(event=event, endpoint="/simulate/log-event", operator_generated=True),
     )
     return {"status": "logged", "event": event, "level": level}
+
+
+def _log_extra(**fields) -> dict[str, object]:
+    request_id = current_request_id()
+    if request_id:
+        fields["request_id"] = request_id
+    return fields
