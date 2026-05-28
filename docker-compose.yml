@@ -29,6 +29,7 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
       MODEL_NAME: ${MODEL_NAME:-gpt-4o-mini}
+      DEMO_SERVICE_METRICS_URL: http://demo-service:8000/metrics
     volumes:
       - ./logs:/shared/logs
     depends_on:

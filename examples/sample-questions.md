@@ -10,6 +10,7 @@ Use these against `POST /ask` or the CLI:
 - Which endpoint looks most suspicious?
 - Are there signs of memory pressure?
 - What evidence supports the likely root cause?
+- What do the metrics say about the latest incident?
 
 Example API request:
 
@@ -19,3 +20,10 @@ curl -s -X POST http://localhost:8001/ask \
   -d '{"question":"Is this a latency issue, dependency issue, or application bug?","max_lines":120}'
 ```
 
+Example metrics request:
+
+```bash
+curl -s -X POST http://localhost:8001/analyze/metrics \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```

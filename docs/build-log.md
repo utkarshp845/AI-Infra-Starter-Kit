@@ -132,3 +132,45 @@ What comes next:
 - Teach the AI SRE Assistant to read metrics.
 - Let incident summaries combine log evidence and metric evidence.
 - Add optional Prometheus and Grafana without making them required for Day 1.
+
+## Week 2, Day 4 - Assistant Reads Metrics
+
+Today I taught the AI SRE Assistant to read metrics.
+
+Day 1 gave the demo service cleaner metrics.
+
+Day 2 made logs easier to correlate with request IDs.
+
+Day 3 added incident walkthroughs.
+
+Day 4 connects the assistant to a second evidence source.
+
+What changed:
+
+- Added a Prometheus text metrics reader.
+- Added deterministic metrics analysis.
+- Added `POST /analyze/metrics`.
+- Updated `POST /summarize-incident` to include logs, metrics, and combined interpretation.
+- Added a sample metrics file.
+- Documented the new assistant behavior and metrics URL configuration.
+
+Why this matters:
+
+Logs and metrics answer different questions.
+
+Logs explain specific events. Metrics show volume, status distribution, affected paths, and latency shape.
+
+The assistant becomes more useful when it can combine both instead of only reading recent log lines.
+
+Lessons learned:
+
+- AI analysis is only as good as the evidence it receives.
+- Deterministic analysis should work before adding LLM enrichment.
+- Metrics help the assistant avoid overfitting to one log line.
+- The safest assistant behavior is still facts first, guesses second, safe next steps always.
+
+What comes next:
+
+- Improve combined incident summaries with richer examples.
+- Add optional Prometheus and Grafana for people ready to see metrics in a dashboard.
+- Keep the default local path small and laptop-friendly.

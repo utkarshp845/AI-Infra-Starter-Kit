@@ -1,0 +1,21 @@
+# HELP demo_service_http_requests_total Total HTTP requests handled by demo-service.
+# TYPE demo_service_http_requests_total counter
+demo_service_http_requests_total{method="GET",path="/health",status_code="200"} 4
+demo_service_http_requests_total{method="GET",path="/api/orders",status_code="200"} 3
+demo_service_http_requests_total{method="GET",path="/simulate/error",status_code="500"} 2
+demo_service_http_requests_total{method="GET",path="/simulate/latency",status_code="200"} 1
+# HELP demo_service_http_request_duration_seconds HTTP request duration in seconds.
+# TYPE demo_service_http_request_duration_seconds histogram
+demo_service_http_request_duration_seconds_bucket{method="GET",path="/simulate/latency",le="1"} 0
+demo_service_http_request_duration_seconds_bucket{method="GET",path="/simulate/latency",le="2.5"} 1
+demo_service_http_request_duration_seconds_sum{method="GET",path="/simulate/latency"} 1.400000
+demo_service_http_request_duration_seconds_count{method="GET",path="/simulate/latency"} 1
+# HELP demo_service_simulated_errors_total Intentional simulated errors by endpoint and error type.
+# TYPE demo_service_simulated_errors_total counter
+demo_service_simulated_errors_total{endpoint="/simulate/error",error_type="checkout_dependency_timeout"} 2
+# HELP demo_service_simulated_latency_events_total Intentional latency simulation events by endpoint.
+# TYPE demo_service_simulated_latency_events_total counter
+demo_service_simulated_latency_events_total{endpoint="/simulate/latency"} 1
+# HELP demo_service_memory_pressure_events_total Intentional memory pressure simulation events.
+# TYPE demo_service_memory_pressure_events_total counter
+demo_service_memory_pressure_events_total{endpoint="/simulate/memory-pressure"} 0
