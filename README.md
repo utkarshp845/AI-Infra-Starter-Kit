@@ -17,7 +17,7 @@ local app -> AI service -> logs/metrics -> AI SRE assistant -> observability -> 
 ## What You Build
 
 - `demo-service`: a FastAPI service that behaves like a small production API.
-- `ai-sre-assistant`: a FastAPI service and CLI that reads the demo logs and explains incidents.
+- `ai-sre-assistant`: a FastAPI service and CLI that reads demo logs and metrics, then explains incidents.
 - Docker Compose wiring so both services share the same log file locally.
 - Tests, sample logs, docs, and a 30-day roadmap for building in public.
 - Incident walkthroughs that show how to reason from symptoms, metrics, logs, and safe next steps.
@@ -78,6 +78,22 @@ curl -s -X POST http://localhost:8001/ask \
   -d '{"question":"Why is the demo service failing?","max_lines":120}'
 ```
 
+Ask for metrics analysis:
+
+```bash
+curl -s -X POST http://localhost:8001/analyze/metrics \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+Summarize an incident with logs and metrics:
+
+```bash
+curl -s -X POST http://localhost:8001/summarize-incident \
+  -H "Content-Type: application/json" \
+  -d '{"max_lines":120}'
+```
+
 ## Repository Structure
 
 ```text
@@ -97,8 +113,8 @@ ai-infra-starter-kit/
 1. You run both apps with Docker Compose.
 2. `demo-service` writes JSON logs to `/shared/logs/demo-service.log`.
 3. The host maps that file to `./logs/demo-service.log`.
-4. `ai-sre-assistant` reads the same file.
-5. The assistant separates facts from guesses, cites log evidence, and recommends safe next debugging steps.
+4. `ai-sre-assistant` reads the same file and fetches `demo-service` metrics.
+5. The assistant separates facts from guesses, cites evidence, and recommends safe next debugging steps.
 
 ## Example Workflow
 
