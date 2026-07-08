@@ -20,7 +20,7 @@ This keeps the Week 3 path close to the existing Docker workflow.
 
 - `namespace.yaml`: creates the `ai-infra-starter-kit` namespace.
 - `configmap.yaml`: stores non-secret environment variables.
-- `secret.example.yaml`: optional placeholder for `OPENAI_API_KEY`.
+- `secret.example.yaml`: documents the optional `OPENAI_API_KEY` Secret shape. Do not put real keys in this file.
 - `storage.yaml`: creates local shared storage for demo logs.
 - `demo-service.yaml`: runs and exposes the demo service.
 - `ai-sre-assistant.yaml`: runs and exposes the assistant.
@@ -94,13 +94,13 @@ kubectl apply -f infra/k8s/configmap.yaml
 kubectl apply -f infra/k8s/storage.yaml
 ```
 
-The assistant works without an LLM key. If you want to use one later, copy `secret.example.yaml`, add your key locally, and apply your private copy.
-
-For the default rule-based assistant, applying the example secret is optional:
+The assistant works without an LLM key. For the default rule-based assistant, applying the example secret is optional:
 
 ```bash
 kubectl apply -f infra/k8s/secret.example.yaml
 ```
+
+For the optional LLM setup and the safer private `secret.local.yaml` workflow, see `../../docs/11-kubernetes-config-and-secrets.md`.
 
 Apply the workloads:
 

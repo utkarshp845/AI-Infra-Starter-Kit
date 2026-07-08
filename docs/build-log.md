@@ -257,3 +257,40 @@ What comes next:
 - Spend a focused day on ConfigMaps, Secrets, and environment-specific configuration.
 - Expand the health check and resource limit explanation.
 - Keep the kind path simple before introducing Helm, Ingress, or observability stacks.
+
+## Week 3, Day 4 - Kubernetes ConfigMaps And Secrets
+
+Today I documented how configuration moves from Docker Compose into Kubernetes.
+
+Day 3 focused on operating the local kind deployment. Day 4 focuses on how the apps receive configuration once they are running in the cluster.
+
+What changed:
+
+- Added a Kubernetes ConfigMaps and Secrets guide.
+- Explained which values belong in the ConfigMap and why.
+- Explained why `OPENAI_API_KEY` belongs in a Secret.
+- Documented the default no-key path where the assistant uses rule-based analysis.
+- Added an optional local LLM setup using a private `secret.local.yaml` file.
+- Added `.gitignore` protection for the private local Secret file.
+- Clarified `configmap.yaml` and `secret.example.yaml` comments.
+- Linked the new guide from the README, Kubernetes walkthrough, and operations runbook.
+
+Why this matters:
+
+Kubernetes configuration is easier to understand when it maps back to something familiar. A Docker Compose `.env` file becomes a ConfigMap for normal values and a Secret for sensitive values.
+
+The important production-minded habit is the boundary: commit normal config when it is safe, but never commit real credentials.
+
+Lessons learned:
+
+- ConfigMaps are for normal configuration, not secrets.
+- Secrets should be optional when the beginner path can work without them.
+- Environment variables from ConfigMaps and Secrets are read when the container starts.
+- Restarting a Deployment is the simple way to pick up changed env values.
+- The assistant remains useful without an LLM key because deterministic analysis is the default.
+
+What comes next:
+
+- Spend a focused day on probes, health checks, and resource requests/limits.
+- Show how Kubernetes decides whether a pod is ready for traffic.
+- Keep the local kind path small before adding Helm, Ingress, or external secret managers.

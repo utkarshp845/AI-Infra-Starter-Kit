@@ -154,7 +154,7 @@ If a Service has no endpoints, Kubernetes has not found any ready pods behind it
 
 ## Inspect Configuration
 
-Normal configuration lives in the ConfigMap:
+Normal configuration lives in the ConfigMap. For the full config and secrets walkthrough, see `11-kubernetes-config-and-secrets.md`:
 
 ```bash
 kubectl describe configmap ai-infra-starter-kit-config -n ai-infra-starter-kit
