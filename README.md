@@ -74,6 +74,8 @@ For the kind-based Kubernetes walkthrough, see `infra/k8s/README.md`.
 
 For a practical Kubernetes operations checklist, see `docs/10-kubernetes-operations-runbook.md`.
 
+For Kubernetes config and secrets basics, see `docs/11-kubernetes-config-and-secrets.md`.
+
 Ask the assistant directly:
 
 ```bash
@@ -108,6 +110,7 @@ ai-infra-starter-kit/
   docs/                  # Learning path and production notes
     incidents/           # Guided operational debugging examples
     10-kubernetes-operations-runbook.md
+    11-kubernetes-config-and-secrets.md
   infra/                 # Docker, Kubernetes, and Terraform starter notes
     k8s/                 # kind-first Kubernetes manifests and walkthrough
   scripts/               # Local traffic and log helper scripts

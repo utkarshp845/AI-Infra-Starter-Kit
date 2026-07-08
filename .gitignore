@@ -8,4 +8,4 @@ logs/
 dist/
 build/
 .DS_Store
-
+infra/k8s/secret.local.yaml
