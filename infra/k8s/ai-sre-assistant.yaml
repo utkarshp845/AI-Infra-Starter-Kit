@@ -61,6 +61,7 @@ spec:
           volumeMounts:
             - name: demo-logs
               mountPath: /shared/logs
+          # The assistant uses /health for readiness in this first local lesson.
           readinessProbe:
             httpGet:
               path: /health
@@ -69,6 +70,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 3
             failureThreshold: 3
+          # Liveness answers whether Kubernetes should restart the container.
           livenessProbe:
             httpGet:
               path: /health
@@ -77,6 +79,7 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 3
             failureThreshold: 3
+          # Requests guide scheduling; limits cap local resource use for this learning lab.
           resources:
             requests:
               cpu: 100m

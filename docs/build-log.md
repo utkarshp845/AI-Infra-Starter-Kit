@@ -294,3 +294,37 @@ What comes next:
 - Spend a focused day on probes, health checks, and resource requests/limits.
 - Show how Kubernetes decides whether a pod is ready for traffic.
 - Keep the local kind path small before adding Helm, Ingress, or external secret managers.
+
+## Week 3, Day 5 - Kubernetes Health Checks And Resources
+
+Today I documented how Kubernetes uses health checks, readiness checks, and resource settings to operate the local learning lab.
+
+Day 4 focused on how configuration reaches the apps. Day 5 focuses on how Kubernetes decides whether those apps are alive, ready for traffic, and running with reasonable CPU and memory expectations.
+
+What changed:
+
+- Added a Kubernetes health checks and resources guide.
+- Explained health vs readiness in beginner-friendly terms.
+- Documented liveness probes, readiness probes, resource requests, and resource limits.
+- Added commands for inspecting Deployments, Pods, events, endpoints, rollouts, and app health endpoints.
+- Added troubleshooting notes for pods that are running but not ready, pods that keep restarting, and `OOMKilled` behavior.
+- Added small manifest comments around probes and resources.
+- Linked the new guide from the README, Kubernetes walkthrough, and operations runbook.
+
+Why this matters:
+
+Kubernetes needs clear signals to operate an app safely. A liveness probe answers whether Kubernetes should restart a container. A readiness probe answers whether the pod should receive traffic. Resource requests help scheduling. Resource limits create local safety boundaries.
+
+Lessons learned:
+
+- Running is not the same as ready.
+- Readiness failures should usually remove traffic, not restart the app.
+- Liveness probes should be conservative because bad restart behavior can make incidents worse.
+- Resource requests are scheduling signals; limits are enforcement boundaries.
+- The current values are learning defaults, not production tuning recommendations.
+
+What comes next:
+
+- Connect Kubernetes events, logs, and assistant analysis into a clearer incident workflow.
+- Add a small Kubernetes troubleshooting example using the existing simulated failure endpoints.
+- Keep autoscaling and HPA for after resource requests are easier to understand.

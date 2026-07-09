@@ -76,6 +76,8 @@ For a practical Kubernetes operations checklist, see `docs/10-kubernetes-operati
 
 For Kubernetes config and secrets basics, see `docs/11-kubernetes-config-and-secrets.md`.
 
+For Kubernetes probes and resource basics, see `docs/12-kubernetes-health-and-resources.md`.
+
 Ask the assistant directly:
 
 ```bash
@@ -111,6 +113,7 @@ ai-infra-starter-kit/
     incidents/           # Guided operational debugging examples
     10-kubernetes-operations-runbook.md
     11-kubernetes-config-and-secrets.md
+    12-kubernetes-health-and-resources.md
   infra/                 # Docker, Kubernetes, and Terraform starter notes
     k8s/                 # kind-first Kubernetes manifests and walkthrough
   scripts/               # Local traffic and log helper scripts
