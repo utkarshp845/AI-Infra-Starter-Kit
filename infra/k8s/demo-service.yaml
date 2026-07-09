@@ -35,6 +35,7 @@ spec:
           volumeMounts:
             - name: demo-logs
               mountPath: /shared/logs
+          # Readiness answers whether this pod should receive traffic.
           readinessProbe:
             httpGet:
               path: /ready
@@ -43,6 +44,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 3
             failureThreshold: 3
+          # Liveness answers whether Kubernetes should restart the container.
           livenessProbe:
             httpGet:
               path: /health
@@ -51,6 +53,7 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 3
             failureThreshold: 3
+          # Requests guide scheduling; limits cap local resource use for this learning lab.
           resources:
             requests:
               cpu: 100m

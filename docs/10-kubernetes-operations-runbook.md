@@ -72,7 +72,7 @@ curl http://localhost:8000/metrics
 curl http://localhost:8001/health
 ```
 
-These checks separate Kubernetes health from application health:
+These checks separate Kubernetes health from application health. For the full probes and resources walkthrough, see `12-kubernetes-health-and-resources.md`:
 
 - Kubernetes can show a pod is running.
 - `/ready` tells you whether the app considers itself ready.

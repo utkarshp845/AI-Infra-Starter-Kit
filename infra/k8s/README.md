@@ -124,6 +124,8 @@ kubectl get pods,svc,pvc -n ai-infra-starter-kit
 
 For a more complete operations and troubleshooting checklist, see `../../docs/10-kubernetes-operations-runbook.md`.
 
+For a focused guide to probes and resource requests/limits, see `../../docs/12-kubernetes-health-and-resources.md`.
+
 ## 6. Port Forward Services
 
 Open one terminal for `demo-service`:
