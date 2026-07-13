@@ -82,6 +82,8 @@ For a Kubernetes incident debugging walkthrough, see `docs/13-kubernetes-inciden
 
 For Kubernetes production next steps, see `docs/14-kubernetes-production-next-steps.md`.
 
+For security hardening basics, see `docs/07-security.md` and `SECURITY.md`.
+
 Ask the assistant directly:
 
 ```bash
@@ -176,3 +178,7 @@ Day 1 lessons are intentionally simple:
 ## Contributing
 
 Contributions should keep the learning path gradual. Before adding a new tool, explain the problem it solves and where it fits in the local app -> production-minded path. See `CONTRIBUTING.md` for details.
+
+## Security
+
+Do not commit real secrets, API keys, private logs, or local Kubernetes Secret files. See `SECURITY.md` for reporting guidance and `docs/07-security.md` for the project security model.
