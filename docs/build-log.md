@@ -395,3 +395,35 @@ What comes next:
 - Add secret handling and redaction rules.
 - Introduce cost optimization and assistant evaluation basics.
 - Keep vLLM, Triton, Ray, KServe, and GPU scheduling as optional advanced roadmap items.
+
+## Week 4, Day 1 - Security Hardening Basics
+
+Today I started Week 4 by adding the first security hardening layer.
+
+Week 3 answered how the app maps into Kubernetes. Week 4 starts with a different question: what could leak, who can access what, and how should the assistant behave safely?
+
+What changed:
+
+- Added a `SECURITY.md` for public reporting guidance.
+- Expanded the security documentation with a project threat model.
+- Documented local secret rules for `.env`, `OPENAI_API_KEY`, Kubernetes Secret examples, and `secret.local.yaml`.
+- Added guidance for logs, LLM provider safety, assistant behavior, service exposure, containers, and dependency basics.
+- Linked security guidance from the README and Kubernetes production next-steps guide.
+
+Why this matters:
+
+Security should show up before production. The local lab is intentionally simple, but the habits should be production-minded: keep secrets out of git, redact sensitive logs, avoid sending private data to LLM providers without review, and treat assistant output as evidence-grounded guidance rather than authority.
+
+Lessons learned:
+
+- Security starts with naming what can leak.
+- A local `.env` file is convenient, but it must stay out of git.
+- Logs are evidence, but they can also become a data leak.
+- The safest assistant behavior is conservative, cited, and non-destructive.
+- Kubernetes Secrets teach the primitive, but production needs stronger secret management.
+
+What comes next:
+
+- Add focused redaction guidance for logs and assistant inputs.
+- Tighten examples around safe secret handling.
+- Continue Week 4 with cost optimization and assistant evaluation basics.

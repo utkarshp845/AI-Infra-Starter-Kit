@@ -166,6 +166,8 @@ Recommended sequence:
 
 The key is to keep the project anchored in the working lab. Each advanced tool should answer a specific problem the lab has already revealed.
 
+Start with `07-security.md` before adding heavier production tooling. Security habits should appear before a service is exposed, scaled, or connected to real operational data.
+
 ## Week 3 Takeaway
 
 I did not learn Kubernetes by adding every Kubernetes tool.
