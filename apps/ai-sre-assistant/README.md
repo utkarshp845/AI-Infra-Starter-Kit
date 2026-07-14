@@ -64,3 +64,17 @@ DEMO_SERVICE_METRICS_URL=http://localhost:8000/metrics
 ```
 
 For local Ollama experiments, set `LLM_PROVIDER=ollama` and use an OpenAI-compatible Ollama base URL.
+
+## Redaction
+
+The assistant replaces obvious sensitive values with `[REDACTED]` before analysis and before data is sent to an optional LLM provider.
+
+Redaction covers:
+
+- parsed and raw log content.
+- sensitive nested fields and common token patterns.
+- questions echoed by the API.
+- LLM prompt inputs and generated text.
+- final API responses.
+
+This is a pattern-based backup control, not a complete data loss prevention system. Keep secrets out of logs and review operational data before sharing it or enabling an external provider. See `../../docs/15-secret-handling-and-redaction.md`.

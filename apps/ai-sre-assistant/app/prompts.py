@@ -12,6 +12,7 @@ Requirements:
 - Cite log line numbers or event names when possible.
 - Do not invent services, dependencies, stack traces, or commands.
 - Avoid dangerous commands.
+- Do not reconstruct, request, or expose redacted values.
 - Recommend safe next debugging steps.
 - Be concise and practical.
 

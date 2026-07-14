@@ -6,6 +6,7 @@ from typing import Any
 import httpx
 
 from app.prompts import ANALYSIS_INSTRUCTIONS, SYSTEM_PROMPT
+from app.redaction import redact_data, redact_text
 
 
 @dataclass(frozen=True)
@@ -45,13 +46,16 @@ def analyze_with_llm(
     if not is_configured(config):
         return None, "LLM provider is not configured; using rule-based analysis."
 
-    evidence = "\n".join(json.dumps(entry, default=str) for entry in logs[-50:])
+    safe_question = redact_text(question)
+    safe_logs = redact_data(logs[-50:])
+    safe_analysis = redact_data(rule_based_analysis)
+    evidence = "\n".join(json.dumps(entry, default=str) for entry in safe_logs)
     user_prompt = f"""
 Question:
-{question}
+{safe_question}
 
 Rule-based pre-analysis:
-{json.dumps(rule_based_analysis, indent=2, default=str)}
+{json.dumps(safe_analysis, indent=2, default=str)}
 
 Recent log evidence:
 {evidence}
@@ -78,7 +82,7 @@ Recent log evidence:
             response.raise_for_status()
             data = response.json()
             content = data["choices"][0]["message"]["content"]
-            return str(content).strip(), None
+            return redact_text(str(content).strip()), None
     except Exception as exc:
-        return None, f"LLM request failed; using rule-based analysis. Error: {exc}"
+        return None, f"LLM request failed; using rule-based analysis. Error: {redact_text(str(exc))}"
 

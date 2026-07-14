@@ -4,6 +4,9 @@ from collections import deque
 from pathlib import Path
 from typing import Any
 
+from app.redaction import redact_data, redact_text
+
+
 
 DEFAULT_LOG_PATH = "logs/demo-service.log"
 
@@ -35,13 +38,13 @@ def parse_log_lines(lines: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if not isinstance(entry, dict):
                 entry = {"message": str(entry)}
             entry["_line_number"] = item["line_number"]
-            entry["_raw"] = raw
-            parsed.append(entry)
+            entry["_raw"] = redact_text(raw)
+            parsed.append(redact_data(entry))
         except json.JSONDecodeError:
             parsed.append(
                 {
                     "_line_number": item["line_number"],
-                    "_raw": raw,
+                    "_raw": redact_text(raw),
                     "level": "WARNING",
                     "event": "malformed_log_line",
                     "message": "Log line could not be parsed as JSON.",

@@ -427,3 +427,40 @@ What comes next:
 - Add focused redaction guidance for logs and assistant inputs.
 - Tighten examples around safe secret handling.
 - Continue Week 4 with cost optimization and assistant evaluation basics.
+
+## Week 4, Day 2 - Secret Handling And Redaction Rules
+
+Today I turned the security guidance into an enforced assistant boundary.
+
+Day 1 named the main risks and guardrails. Day 2 focuses on reducing accidental credential exposure as logs and questions move through the assistant.
+
+What changed:
+
+- Added a reusable redaction module for structured fields and common token patterns.
+- Redacted parsed JSON fields and raw log text before rule-based analysis.
+- Redacted assistant questions before analysis and before echoing them in API responses.
+- Added defense-in-depth redaction immediately before optional LLM requests.
+- Redacted generated LLM text and final API responses.
+- Added focused tests for nested fields, free text, malformed logs, API output, and LLM prompts.
+- Added a dedicated secret handling and redaction guide with safe examples and explicit limitations.
+- Aligned the assistant README, security model, security policy, and root README with the implemented behavior.
+
+Why this matters:
+
+Logs are valuable operational evidence, but they are also a common path for accidental data exposure. An optional external LLM adds another boundary where the project must minimize what leaves the local environment.
+
+The rule-based path still works without a provider. When a provider is enabled, pattern-based redaction now happens before the request. This reduces obvious leaks without pretending that regex-based filtering makes arbitrary production data safe.
+
+Lessons learned:
+
+- Preventing secrets from entering logs is stronger than removing them later.
+- Redaction should happen near ingestion and again at external boundaries.
+- Structured field rules and free-text token rules solve different parts of the problem.
+- Generated model text needs the same output checks as input prompts.
+- A security control should document its false-positive and false-negative limits.
+- A leaked credential must be rotated even if the visible copy is later redacted.
+
+What comes next:
+
+- Continue Week 4 with practical cost optimization habits.
+- Keep assistant evaluation basics next so safety and usefulness can be tested together.
