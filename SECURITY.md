@@ -71,6 +71,6 @@ Production deployments need additional controls such as authentication, network 
 - The kind setup uses port-forwarding for local access.
 - The local Kubernetes path uses a shared PVC for logs as a learning bridge.
 - Kubernetes Secrets are used as a first teaching primitive, not as a complete production secret-management system.
-- The AI SRE Assistant does not yet include a full redaction, policy, or evaluation layer.
+- The AI SRE Assistant includes focused pattern-based redaction, but not a full data loss prevention, policy, or evaluation layer.
 
 These are intentional for the early learning path and should be addressed before production use.

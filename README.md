@@ -84,6 +84,9 @@ For Kubernetes production next steps, see `docs/14-kubernetes-production-next-st
 
 For security hardening basics, see `docs/07-security.md` and `SECURITY.md`.
 
+For secret handling and enforced assistant redaction rules, see `docs/15-secret-handling-and-redaction.md`.
+
+
 Ask the assistant directly:
 
 ```bash
@@ -122,6 +125,7 @@ ai-infra-starter-kit/
     12-kubernetes-health-and-resources.md
     13-kubernetes-incident-debugging.md
     14-kubernetes-production-next-steps.md
+    15-secret-handling-and-redaction.md
   infra/                 # Docker, Kubernetes, and Terraform starter notes
     k8s/                 # kind-first Kubernetes manifests and walkthrough
   scripts/               # Local traffic and log helper scripts

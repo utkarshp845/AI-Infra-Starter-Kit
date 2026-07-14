@@ -1,6 +1,8 @@
 # Security
 
 Week 4 starts with security hardening basics.
+Day 2 adds focused secret handling rules and an enforced redaction boundary in the AI SRE Assistant.
+
 
 The goal is not to turn the local learning lab into an enterprise platform in one day. The goal is to name the first risks clearly and build safer habits before production.
 
@@ -68,7 +70,14 @@ Do not put these values in logs:
 - cloud credentials.
 - raw authorization headers.
 
+
 Before sharing logs publicly, redact values that identify private systems, accounts, users, or credentials.
+The assistant applies pattern-based redaction when logs are parsed and again before optional LLM requests. Questions, generated LLM text, and final API responses also pass through the same redactor.
+
+Redaction is a backup control, not proof that arbitrary logs are safe. Unknown secret formats, encoded values, and private customer data may still require manual review.
+
+See `15-secret-handling-and-redaction.md` for the exact rules, examples, and limitations.
+
 
 ## Assistant Safety
 
@@ -98,6 +107,8 @@ The default assistant path does not need an LLM key.
 
 When `LLM_PROVIDER=none`, the assistant uses deterministic rule-based analysis. This keeps the project useful without sending logs to an external provider.
 
+When a provider is enabled, prompt inputs are redacted immediately before the request. The provider API key is used in the HTTP authorization header and is not included in the prompt.
+
 Before enabling an external LLM provider:
 
 - review what logs may be sent.
@@ -118,7 +129,7 @@ Production should add:
 - pinned dependency versions.
 - regular rebuilds for base image updates.
 
-These are later hardening steps. Day 1 of Week 4 is about naming the risks and creating guardrails.
+These container and dependency controls remain later hardening steps.
 
 ## Service Exposure
 

@@ -8,6 +8,7 @@ from app.llm import analyze_with_llm
 from app.log_reader import get_log_path, read_recent_logs
 from app.metrics_analyzer import analyze_metrics, combined_incident_analysis
 from app.metrics_reader import fetch_metrics_text, get_metrics_url, parse_prometheus_text
+from app.redaction import redact_data, redact_text
 
 
 app = FastAPI(
@@ -95,10 +96,11 @@ def summarize_incident(request: SummarizeIncidentRequest) -> dict[str, Any]:
         if llm_notice:
             response["llm_notice"] = llm_notice
 
-    return response
+    return redact_data(response)
 
 
 def _analyze(question: str, max_lines: int, use_llm: bool) -> dict[str, Any]:
+    question = redact_text(question)
     log_path = get_log_path()
     logs = read_recent_logs(log_path=log_path, max_lines=max_lines)
     rule_based = analyze_logs(logs, question=question)
@@ -119,7 +121,7 @@ def _analyze(question: str, max_lines: int, use_llm: bool) -> dict[str, Any]:
         if llm_notice:
             response["llm_notice"] = llm_notice
 
-    return response
+    return redact_data(response)
 
 
 def _analyze_metrics(metrics_url: str | None, metrics_text: str | None) -> dict[str, Any]:
@@ -141,4 +143,4 @@ def _analyze_metrics(metrics_url: str | None, metrics_text: str | None) -> dict[
     if notice:
         response["metrics_notice"] = notice
 
-    return response
+    return redact_data(response)
