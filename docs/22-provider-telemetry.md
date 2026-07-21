@@ -104,9 +104,11 @@ Do not attach customer identifiers to future Prometheus labels. Per-team billing
 
 ## Remaining Week 5 Sequence
 
-1. Add bounded aggregate counters and latency distributions without high-cardinality labels.
-2. Define explicit model pricing inputs and estimated cost metadata without hard-coding unstable prices.
-3. Join provider outcomes and cost with evaluation results to calculate cost per successful evaluated analysis.
-4. Add a local comparison report across deterministic and configured provider paths.
-5. Exercise provider failure and fallback behavior end to end.
-6. Close the week with an exit-gate review against the technical and commercialization roadmaps.
+1. **Day 2:** add bounded aggregate counters and latency distributions without high-cardinality labels.
+2. **Day 3:** define explicit model pricing inputs and estimated cost metadata without hard-coding unstable prices.
+3. **Day 4:** join provider outcomes and cost with evaluation results to calculate cost per successful evaluated analysis.
+4. **Day 5:** add a local comparison report across deterministic and configured provider paths.
+5. **Day 6:** exercise provider failure and fallback behavior end to end.
+6. **Day 7:** close the week with separate technical-exit and commercialization-status reviews.
+
+Week 5 can complete the local measurement foundation during Commercialization Phase A. It does not complete the Phase B provider-metering milestone until design-partner usage is measurable.

@@ -199,7 +199,7 @@ The first four steps are the measurement work scheduled for Weeks 5-8 of the [pr
 1. Capture provider token usage, model identity, latency, outcome, fallback, and cost metadata in Week 5.
 2. Expand and version the evaluation corpus in Week 6 so every candidate uses the same privacy and safety gates.
 3. Stabilize the optional production signal path and operational exercise in Week 7.
-4. Run the provider-versus-private-endpoint benchmark and record the build-versus-buy decision in Week 8.
+4. Build the provider-versus-private-endpoint benchmark harness in Week 8, execute a private-endpoint comparison only for a named requirement, and record the build-versus-buy decision.
 5. Test one approved model behind an authenticated OpenAI-compatible endpoint only when the decision supports it.
 6. Add an optional single-GPU deployment example without changing the default quickstart.
 7. Prove quality, reliability, and unit economics under representative load.

@@ -75,7 +75,7 @@ The next four technical weeks deepen measured contracts before adding infrastruc
 | 5 | Provider telemetry | Start with the privacy-safe per-call contract, then aggregate model, latency, token usage, failure, fallback, and cost metadata and compare it with evaluation outcomes. |
 | 6 | Evaluation maturity | Expand and version sanitized and adversarial cases, produce machine-readable CI results, and preserve privacy and safety as hard gates. |
 | 7 | Production signal path | Add optional OpenTelemetry collection only after signal contracts are stable, then exercise one owned alert-to-runbook recovery flow. |
-| 8 | Provider versus private benchmark | Compare deterministic, provider, and compatible private endpoints with the same corpus and record a build-versus-buy decision. |
+| 8 | Provider versus private benchmark | Build the shared benchmark harness, compare deterministic and managed-provider paths, run a private endpoint only for a named requirement, and record a build-versus-buy decision. |
 
 Internal-pilot controls begin only after this measurement loop works and customer discovery supports a design-partner deployment. vLLM, Triton, Ray Serve, KServe, GPU scheduling, multi-tenancy, and paid platform features stay behind demonstrated demand and the adoption gates in the [advanced model serving roadmap](19-advanced-model-serving-roadmap.md).
 

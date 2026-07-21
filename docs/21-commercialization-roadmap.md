@@ -4,6 +4,8 @@ This document turns the product direction from `docs/19-advanced-model-serving-r
 
 The strategy is deliberate: audience first, wedge product second, paid tiers third. Each phase funds and de-risks the next, and no phase starts before the previous phase's exit criteria are met.
 
+The technical Weeks 5-8 in the [project roadmap](09-roadmap.md) may continue as open-source foundation and build-in-public work during Phase A. Finishing those weeks does not advance the commercialization phase. Customer-private data, real connectors, design-partner deployments, and paid packaging remain behind the Phase A and Phase B exit criteria.
+
 ## Strategy Summary
 
 The AI incident-copilot market is crowded with well-funded products. AIOps Lab does not win by out-building them from a standing start. It wins by:

@@ -685,6 +685,7 @@ What changed:
 - Added tests for successful usage, latency, provider failure, unconfigured fallback, both API paths, and telemetry privacy.
 - Added a provider telemetry guide with field semantics, forbidden data, customer value, and the remaining Week 5 sequence.
 - Restored the canonical Weeks 5-8 technical roadmap while preserving the audience and design-partner gates in the commercialization roadmap.
+- Added a cross-track alignment table that separates local technical exit gates from customer discovery, private-data, real-connector, pilot, and willingness-to-pay gates.
 
 Why this matters:
 
