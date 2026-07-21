@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve AIOps Lab.
+Thanks for helping improve Reliability Lab.
 
 The main rule is simple: keep the project beginner-friendly without making it shallow. A new feature should teach a real AI infrastructure concept at the right time.
 
@@ -49,4 +49,3 @@ In your PR, include:
 - Why it belongs in the learning path.
 - How you tested it.
 - Any tradeoffs or follow-up work.
-

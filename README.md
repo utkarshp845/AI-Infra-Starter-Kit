@@ -1,8 +1,8 @@
-# AIOps-Lab
+# Reliability Lab
 
 Simple first. Production-minded always.
 
-AIOps Lab is a practical learning lab for AI infrastructure. It starts with a normal web service, adds logs and metrics, then uses an AI SRE Assistant to explain what is happening operationally.
+Reliability Lab is a practical learning lab for AI infrastructure. It starts with a normal web service, adds logs and metrics, then uses an AI SRE Assistant to explain what is happening operationally.
 
 The first version runs on a normal laptop. No GPU, Kubernetes, vLLM, Triton, Ray, KServe, or full MLOps platform is required on Day 1.
 
@@ -41,8 +41,8 @@ The AI assistant does not need an LLM key to work. If no provider is configured,
 ## Quickstart
 
 ```bash
-git clone https://github.com/utkarshp845/AIOps-Lab.git
-cd AIOps-Lab
+git clone https://github.com/utkarshp845/Reliability-Lab.git
+cd Reliability-Lab
 cp .env.example .env
 make up
 make test
@@ -126,7 +126,7 @@ curl -s -X POST http://localhost:8001/summarize-incident \
 ## Repository Structure
 
 ```text
-AIOps-Lab/
+Reliability-Lab/
   apps/
     demo-service/        # FastAPI app that emits health, failure, latency, logs, and metrics
     ai-sre-assistant/    # FastAPI app and CLI that analyze demo-service logs

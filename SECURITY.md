@@ -1,6 +1,6 @@
 # Security Policy
 
-AIOps Lab is a learning project, but security issues still matter.
+Reliability Lab is a learning project, but security issues still matter.
 
 This repo intentionally starts local and simple. Please do not treat the default Docker Compose or kind setup as production-ready.
 

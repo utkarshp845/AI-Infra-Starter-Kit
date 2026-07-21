@@ -1,6 +1,6 @@
 # Kubernetes Production Next Steps
 
-Week 3 Day 7 closes the first Kubernetes chapter of AIOps Lab.
+Week 3 Day 7 closes the first Kubernetes chapter of Reliability Lab.
 
 The local kind setup now teaches the core mapping:
 

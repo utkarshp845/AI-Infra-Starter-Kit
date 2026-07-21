@@ -6,7 +6,7 @@ The strategy is deliberate: audience first, wedge product second, paid tiers thi
 
 ## Strategy Summary
 
-The AI incident-copilot market is crowded with well-funded products. AIOps Lab does not win by out-building them from a standing start. It wins by:
+The AI incident-copilot market is crowded with well-funded products. Reliability Lab does not win by out-building them from a standing start. It wins by:
 
 1. Teaching an underserved audience (production engineers new to AI infra) and earning distribution through the open learning lab.
 2. Converting that audience into customer discovery for a narrow wedge: an evidence-grounded incident analyst whose quality is enforced by a CI evaluation gate.

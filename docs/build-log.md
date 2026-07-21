@@ -2,7 +2,7 @@
 
 ## Day 1 - Simple First, Production-Minded Always
 
-I am building AIOps Lab because AI infrastructure is becoming part of normal software infrastructure, but the learning path often starts too late in the stack.
+I am building Reliability Lab because AI infrastructure is becoming part of normal software infrastructure, but the learning path often starts too late in the stack.
 
 AI infra is intimidating because beginners are quickly surrounded by model serving frameworks, GPU scheduling, Kubernetes operators, distributed systems, observability, evals, and cost tradeoffs. Those topics matter, but they do not need to arrive all at once.
 
@@ -542,7 +542,7 @@ What comes next:
 
 ## Week 4, Day 5 - Production Observability Upgrade Path
 
-Today I mapped the local AIOps Lab signals to a production observability architecture.
+Today I mapped the local Reliability Lab signals to a production observability architecture.
 
 Day 4 made assistant quality testable. Day 5 asks how teams can operate, govern, and measure the service once logs and metrics no longer live on one laptop.
 
@@ -582,7 +582,7 @@ What comes next:
 
 ## Week 4, Day 6 - Advanced Model Serving Roadmap
 
-Today I defined when AIOps Lab should move from managed model providers to self-hosted inference and how that decision can support a real product.
+Today I defined when Reliability Lab should move from managed model providers to self-hosted inference and how that decision can support a real product.
 
 Day 5 mapped the production observability path. Day 6 uses those quality, latency, usage, and cost signals to decide whether advanced serving infrastructure is justified.
 
@@ -649,7 +649,7 @@ Why this matters:
 
 Production readiness is not a feeling and it is not a list of tools. It is a decision backed by tests, measurable gates, clear ownership, and an honest account of unresolved risk.
 
-AIOps Lab is ready to ship as an open learning project when the validation gate passes. It is not yet an internet-facing multi-tenant production service, and the review says so explicitly. That boundary makes the project more credible, not less ambitious.
+Reliability Lab is ready to ship as an open learning project when the validation gate passes. It is not yet an internet-facing multi-tenant production service, and the review says so explicitly. That boundary makes the project more credible, not less ambitious.
 
 Lessons learned:
 
