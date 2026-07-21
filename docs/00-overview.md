@@ -1,6 +1,6 @@
 # Overview
 
-AIOps Lab teaches AI infrastructure by starting with the parts every production engineer already understands: services, logs, health checks, metrics, containers, and operational debugging.
+Reliability Lab teaches AI infrastructure by starting with the parts every production engineer already understands: services, logs, health checks, metrics, containers, and operational debugging.
 
 The AI part is introduced as an assistant that observes a service, not as a giant platform on Day 1.
 
@@ -24,4 +24,3 @@ The AI part is introduced as an assistant that observes a service, not as a gian
 - Optional OpenAI-compatible LLM integration.
 - Docker Compose.
 - Tests and CI.
-

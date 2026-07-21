@@ -1,6 +1,6 @@
 # Production Observability Upgrade Path
 
-Week 4, Day 5 maps the local AIOps Lab signals to a production-minded observability system.
+Week 4, Day 5 maps the local Reliability Lab signals to a production-minded observability system.
 
 The current setup is intentionally small: `demo-service` writes structured logs to a shared file, exposes Prometheus-style metrics, and the AI SRE Assistant reads that evidence directly. Production changes the transport, storage, access, and operating model. It should not change the core reasoning pattern:
 
@@ -154,7 +154,7 @@ Send collector output to a managed observability platform. This reduces backend 
 
 Keep OpenTelemetry at the collection boundary and choose different backends by environment or signal type. This preserves portability while allowing managed services where they reduce meaningful toil.
 
-The default AIOps Lab setup should remain dependency-light. A production stack belongs in an optional deployment path after the signals and ownership model are understood.
+The default Reliability Lab setup should remain dependency-light. A production stack belongs in an optional deployment path after the signals and ownership model are understood.
 
 ## Staged Migration
 

@@ -1,6 +1,6 @@
 # Production Readiness Review
 
-Week 4, Day 7 closes the first AIOps Lab learning cycle with an explicit release decision.
+Week 4, Day 7 closes the first Reliability Lab learning cycle with an explicit release decision.
 
 The project now demonstrates a complete local path from application signals to evidence-grounded incident analysis. That makes it ready to publish as a learning lab. It does not make the current Docker Compose or kind configuration ready for internet-facing production use.
 

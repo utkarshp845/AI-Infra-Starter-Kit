@@ -1,6 +1,6 @@
 # Advanced Model Serving Roadmap
 
-Week 4, Day 6 defines when AIOps Lab should move beyond external model providers and which serving layer should solve each production problem.
+Week 4, Day 6 defines when Reliability Lab should move beyond external model providers and which serving layer should solve each production problem.
 
 The project does not need GPUs or a self-hosted model to remain useful. The deterministic analyzer and optional OpenAI-compatible provider path should stay the default until customer requirements or measured workload economics justify more infrastructure.
 
@@ -37,7 +37,7 @@ Do not self-host because GPU infrastructure looks impressive. Low utilization, u
 
 ```mermaid
 flowchart LR
-    product["AIOps Lab API and policy layer"] --> gateway["authenticated model gateway"]
+    product["Reliability Lab API and policy layer"] --> gateway["authenticated model gateway"]
     gateway --> engine["inference engine such as vLLM or Triton"]
     gateway --> appserve["distributed application serving when needed"]
     appserve --> engine
@@ -51,7 +51,7 @@ flowchart LR
     platform --> telemetry
 ```
 
-The AIOps Lab API remains the product boundary. It owns evidence access, redaction, evaluation, policy, quotas, auditability, and user workflows. Serving frameworks provide model execution and orchestration underneath that boundary.
+The Reliability Lab API remains the product boundary. It owns evidence access, redaction, evaluation, policy, quotas, auditability, and user workflows. Serving frameworks provide model execution and orchestration underneath that boundary.
 
 ## What Each Tool Solves
 
@@ -167,7 +167,7 @@ A private deployment is not automatically secure. It only changes who owns the c
 
 ## Monetization Possibilities
 
-The serving engine should not be the product moat. Open-source inference projects will continue to improve. AIOps Lab can monetize the operational and governance layer that customers repeatedly need.
+The serving engine should not be the product moat. Open-source inference projects will continue to improve. Reliability Lab can monetize the operational and governance layer that customers repeatedly need.
 
 | Possible tier | User outcome | Potential paid capabilities |
 | --- | --- | --- |
@@ -209,7 +209,7 @@ The first four steps are the measurement work scheduled for Weeks 5-8 of the [pr
 
 ## Day 6 Definition Of Done
 
-- The default AIOps Lab path still requires no GPU.
+- The default Reliability Lab path still requires no GPU.
 - Each advanced tool maps to a specific problem and adoption gate.
 - Provider and self-hosted options use the same evaluation standard.
 - GPU cost is compared per successful analysis, including operations.
