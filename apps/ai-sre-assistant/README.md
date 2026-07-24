@@ -87,7 +87,7 @@ See `../../docs/16-cost-optimization.md` for the Day 3 cost optimization guide.
 
 When `use_llm=true`, LLM-enabled API responses include `llm_telemetry` with bounded provider and model labels, configuration and attempt state, success or fallback outcome, request latency, and normalized token usage when the provider reports it.
 
-The telemetry object never includes prompts, incident evidence, credentials, provider base URLs, generated output, or user and incident identifiers. It is per-request metadata, not a persistent usage ledger or billing record. When both deployment-owned input/output prices and provider-reported token directions are available, responses also include an `llm_cost_estimate`; otherwise its cost fields remain explicitly unknown.
+The telemetry object never includes prompts, incident evidence, credentials, provider base URLs, generated output, or user and incident identifiers. It is per-request metadata, not a persistent usage ledger. When both deployment-owned input/output prices and provider-reported token directions are available, responses also include an `llm_cost_estimate`; otherwise its cost fields remain explicitly unknown.
 
 `GET /metrics` exposes privacy-safe in-memory aggregates for analysis outcomes, provider request latency, deterministic fallbacks, and provider-reported input/output tokens. Labels are limited to the configured provider/model and fixed outcome, reason, and direction enums. These process-local counters reset when the assistant restarts.
 
@@ -124,3 +124,13 @@ Redaction covers:
 - final API responses.
 
 This is a pattern-based backup control, not a complete data loss prevention system. Keep secrets out of logs and review operational data before sharing it or enabling an external provider. See `../../docs/15-secret-handling-and-redaction.md`.
+
+## Provider Evaluation Cost Report
+
+To join the deterministic rubric with real optional-provider outcomes and estimated cost, configure the provider and prices, then run:
+
+```bash
+python -m evals.run_evals --provider-report
+```
+
+This explicit command makes one provider call per evaluation case and prints a bounded JSON report, including estimated cost per successful evaluated analysis when complete token and price data is available. It remains outside CI so the normal release gate stays offline and cost-free.
